@@ -10,6 +10,9 @@ public class FirstPerson : MonoBehaviour {
 	public float walkSpeed = 6;
 	public float jumpForce = 220;
 	public LayerMask groundedMask;
+
+	public GameObject characterSpawn;
+	private GameObject character;
 	
 	// System vars
 	bool grounded;
@@ -26,9 +29,25 @@ public class FirstPerson : MonoBehaviour {
 		cameraTransform = Camera.main.transform;
 		rigidbody = GetComponent<Rigidbody> ();
 	}
+
+	void Start(){
+		if(ApplicationModel.character == "Marcus")
+		{
+			character = Instantiate(Resources.Load("Prefabs/Marcus")) as GameObject;
+		}
+		else if(ApplicationModel.character == "Ayame")
+		{
+			character = Instantiate(Resources.Load("Prefabs/Ayame")) as GameObject;
+		}
+
+
+		character.transform.parent = characterSpawn.transform;
+		character.transform.position = new Vector3(characterSpawn.transform.position.x, characterSpawn.transform.position.y, characterSpawn.transform.position.z);
+		character.transform.rotation = new Quaternion(0,0,0,0);
+	}
 	
 	void Update() {
-		
+
 		// Look rotation:
 		transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * mouseSensitivityX);
 		verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;

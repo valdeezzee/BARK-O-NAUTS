@@ -33,11 +33,13 @@ public class Main_Menu : MonoBehaviour {
 
 		if(changePlayer){
 			rotateMarcus();
+			ApplicationModel.character = "Marcus";
 			ayame.transform.rotation = new Quaternion( 0, ayameORotation.rotation.y, 0, 0);
 		}
 		else
 		{
 			rotateAyame();
+			ApplicationModel.character = "Ayame";
 			marcus.transform.rotation = new Quaternion( 0, marcusORotation.rotation.y, 0, 0);
 		}
 
